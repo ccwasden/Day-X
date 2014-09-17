@@ -8,16 +8,39 @@
 
 #import "DetailViewController.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UITextFieldDelegate, UITextViewDelegate>
+@property (strong, nonatomic) IBOutlet UITextField *textField;
+@property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UIButton *clearButton;
 
 @end
 
 @implementation DetailViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.textField.delegate = self;
+    self.textField.placeholder = @"Title";
 }
+
+- (IBAction)clearButton:(id)sender {
+    
+    self.textField.text = @"";
+    self.textView.text = @"";
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [self.textField resignFirstResponder];
+    
+    return YES;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
