@@ -19,6 +19,10 @@
 		711A508519388096005642EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711A506D19388095005642EF /* UIKit.framework */; };
 		711A508D19388096005642EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 711A508B19388096005642EF /* InfoPlist.strings */; };
 		711A508F19388096005642EF /* DayXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 711A508E19388096005642EF /* DayXTests.m */; };
+		BE049DD119CDEF77002DB21C /* ESEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = BE049DCE19CDEF77002DB21C /* ESEntry.m */; };
+		BE049DD219CDEF77002DB21C /* ESEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE049DD019CDEF77002DB21C /* ESEntryController.m */; };
+		BE049DD519CDEFCE002DB21C /* DXListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE049DD419CDEFCE002DB21C /* DXListViewController.m */; };
+		BE2A8AB519CBC96B00155F95 /* DXListTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2A8AB419CBC96B00155F95 /* DXListTableViewDataSource.m */; };
 		BE64EB7219C920AB004DD138 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE64EB7019C920AB004DD138 /* DetailViewController.m */; };
 		BE64EB7319C920AB004DD138 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE64EB7119C920AB004DD138 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
@@ -50,6 +54,14 @@
 		711A508A19388096005642EF /* DayXTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DayXTests-Info.plist"; sourceTree = "<group>"; };
 		711A508C19388096005642EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		711A508E19388096005642EF /* DayXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DayXTests.m; sourceTree = "<group>"; };
+		BE049DCD19CDEF77002DB21C /* ESEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEntry.h; sourceTree = "<group>"; };
+		BE049DCE19CDEF77002DB21C /* ESEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEntry.m; sourceTree = "<group>"; };
+		BE049DCF19CDEF77002DB21C /* ESEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEntryController.h; sourceTree = "<group>"; };
+		BE049DD019CDEF77002DB21C /* ESEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEntryController.m; sourceTree = "<group>"; };
+		BE049DD319CDEFCE002DB21C /* DXListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXListViewController.h; sourceTree = "<group>"; };
+		BE049DD419CDEFCE002DB21C /* DXListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXListViewController.m; sourceTree = "<group>"; };
+		BE2A8AB319CBC96B00155F95 /* DXListTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXListTableViewDataSource.h; sourceTree = "<group>"; };
+		BE2A8AB419CBC96B00155F95 /* DXListTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXListTableViewDataSource.m; sourceTree = "<group>"; };
 		BE64EB6F19C920AB004DD138 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		BE64EB7019C920AB004DD138 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		BE64EB7119C920AB004DD138 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -114,8 +126,16 @@
 			children = (
 				711A507819388095005642EF /* DXAppDelegate.h */,
 				711A507919388095005642EF /* DXAppDelegate.m */,
+				BE049DD319CDEFCE002DB21C /* DXListViewController.h */,
+				BE049DD419CDEFCE002DB21C /* DXListViewController.m */,
+				BE2A8AB319CBC96B00155F95 /* DXListTableViewDataSource.h */,
+				BE2A8AB419CBC96B00155F95 /* DXListTableViewDataSource.m */,
 				BE64EB6F19C920AB004DD138 /* DetailViewController.h */,
 				BE64EB7019C920AB004DD138 /* DetailViewController.m */,
+				BE049DCD19CDEF77002DB21C /* ESEntry.h */,
+				BE049DCE19CDEF77002DB21C /* ESEntry.m */,
+				BE049DCF19CDEF77002DB21C /* ESEntryController.h */,
+				BE049DD019CDEF77002DB21C /* ESEntryController.m */,
 				BE64EB7119C920AB004DD138 /* DetailViewController.xib */,
 				711A507B19388095005642EF /* Images.xcassets */,
 				711A507019388095005642EF /* Supporting Files */,
@@ -249,8 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE049DD519CDEFCE002DB21C /* DXListViewController.m in Sources */,
+				BE2A8AB519CBC96B00155F95 /* DXListTableViewDataSource.m in Sources */,
+				BE049DD219CDEF77002DB21C /* ESEntryController.m in Sources */,
 				711A507A19388095005642EF /* DXAppDelegate.m in Sources */,
 				711A507619388095005642EF /* main.m in Sources */,
+				BE049DD119CDEF77002DB21C /* ESEntry.m in Sources */,
 				BE64EB7219C920AB004DD138 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
