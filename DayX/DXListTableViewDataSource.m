@@ -8,6 +8,9 @@
 
 #import "DXListTableViewDataSource.h"
 #import "ESEntryController.h"
+#import "ESEntry.h"
+
+static NSString *titleKey = @"title";
 
 @implementation DXListTableViewDataSource
 
@@ -21,11 +24,10 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    NSDictionary *dict = [ESEntryController sharedInstance].entries[indexPath.row];
+    ESEntry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
     
-    NSString *title = dict[@"title"];
-    
-    cell.textLabel.text = title;
+    cell.textLabel.text = entry.title;
+
     
     return cell;
 }

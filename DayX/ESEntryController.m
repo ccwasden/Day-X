@@ -8,7 +8,6 @@
 
 #import "ESEntryController.h"
 
-
 @interface ESEntryController ()
 
 @property (nonatomic, strong) NSArray *entries;
@@ -62,7 +61,7 @@
     
 }
 
-- (void)replaceEntry:(ESEntry *)oldEntry withEntry:(NSDictionary *)newEntry {
+- (void)replaceEntry:(ESEntry *)oldEntry withEntry:(ESEntry *)newEntry {
     
     if ([self.entries containsObject:oldEntry]) {
         

@@ -7,6 +7,9 @@
 //
 
 #import "DetailViewController.h"
+#import "ESEntryController.h"
+#import "ESEntry.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 static NSString *entryKey = @"entry";
@@ -14,8 +17,11 @@ static NSString *titleKey = @"title";
 static NSString *textKey = @"text";
 
 @interface DetailViewController () <UITextFieldDelegate, UITextViewDelegate>
-@property (strong, nonatomic) IBOutlet UITextField *textField;
-@property (strong, nonatomic) IBOutlet UITextView *textView;
+
+@property (strong, nonatomic) ESEntry *detailEntry;
+
+@property (strong, nonatomic) IBOutlet UITextField *detailTitle;
+@property (strong, nonatomic) IBOutlet UITextView *detailText;
 @property (strong, nonatomic) IBOutlet UIButton *clearButton;
 
 @end
@@ -27,76 +33,127 @@ static NSString *textKey = @"text";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.textField.delegate = self;
-    self.textField.placeholder = @"Title";
+    self.detailTitle.delegate = self;
+    self.detailText.delegate = self;
     
-    self.textView.delegate = self;
-    
-    //self.textView.text = @"Notes...";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.textView.layer.borderWidth = 1.0f;
-    self.textView.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.textView.layer.cornerRadius = 8;
+    self.detailText.layer.borderWidth = 1.0f;
+    self.detailText.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.detailText.layer.cornerRadius = 8;
     
-    NSMutableDictionary *entry = [[NSUserDefaults standardUserDefaults] valueForKey:entryKey];
-    
-    [self updateWithDictionary:entry];
+    [self updateWithEntry:self.detailEntry];
     
 }
+
 
 - (IBAction)clearButton:(id)sender {
     
-    self.textField.text = @"";
-    self.textView.text = @"";
+    self.detailTitle.text = @"";
+    self.detailText.text = @"";
+    //[self save];
    
 }
 
+/*
 - (void)updateWithDictionary:(NSDictionary *)dictionary {
     
     NSString *title = [dictionary objectForKey:titleKey];
     
     if (title) {
-        self.textField.text = title;
+        self.detailTitle.text = title;
     }
     
     NSString *text = [dictionary objectForKey:textKey];
     
     if (text) {
-        self.textView.text = text;
+        self.detailText.text = text;
     }
     
+}
+*/
+
+- (void)updateEntry:(ESEntry *)entry {
+    
+    self.detailEntry = entry;
+}
+
+- (void)updateWithEntry:(ESEntry *)entry {
+    
+    self.detailEntry = entry;
+    
+    if (entry.title) {
+        self.detailTitle.text = entry.title;
+    }
+    //else {
+        //self.detailTitle.placeholder = @"Title";
+    //}
+    
+    if (entry.text) {
+        self.detailText.text = entry.text;
+    }
+    
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [self save];
 }
 
 - (void)save {
     
+    //create a new entry, send that entry to make it a dictionary and save it?
+    
+    
+    ESEntry *newEntry = [ESEntry new];
+    
+    if (self.detailEntry == nil) {
+        // We need to add a new entry to ESEntryController
+        newEntry.title = self.detailTitle.text;
+        newEntry.text = self.detailText.text;
+        [[ESEntryController sharedInstance] addEntry:newEntry];
+    }
+    else {
+        
+        // The entry already exists and we need to replace the old one with the new
+        newEntry.title = self.detailTitle.text;
+        newEntry.text = self.detailText.text;
+        [[ESEntryController sharedInstance] replaceEntry:self.detailEntry withEntry:newEntry];
+    }
+    
+    //[[ESEntryController sharedInstance] synchronize];
+    
+    NSLog(@"HERE");
+    
+    /*
     NSMutableDictionary *data = [NSMutableDictionary new];
     
-    [data setObject:self.textField.text forKey:titleKey];
-    [data setObject:self.textView.text forKey:textKey];
+    [data setObject:self.detailTitle.text forKey:titleKey];
+    [data setObject:self.detailText.text forKey:textKey];
+    
+    
     
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:entryKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
-    
-    
+    */
     
 }
 
+/*
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     
-    [self save];
+    //[self save];
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
     
-    [self save];
+    //[self save];
 }
-
+*/
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    [self.textField resignFirstResponder];
+    [self.detailTitle resignFirstResponder];
     
     return YES;
 }

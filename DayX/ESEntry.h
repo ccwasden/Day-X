@@ -11,7 +11,7 @@
 @interface ESEntry : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *note;
+@property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSDate *timeStamp;
 
 -(NSDictionary *)entryToDictionary;

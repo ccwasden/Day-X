@@ -19,16 +19,17 @@
         dictionary[@"title"] = self.title;
     }
     
-    if (self.note != nil) {
-        dictionary[@"note"] = self.note;
+    if (self.text != nil) {
+        dictionary[@"note"] = self.text;
     }
     
     if (self.timeStamp != nil) {
         dictionary[@"timestamp"] = self.timeStamp;
     }
     
-    return dictionary;
+    return dictionary.copy;
 }
+
 
 -(id)initWithDictionary:(NSDictionary *)dictionary{
     
@@ -37,7 +38,7 @@
         
         //self.title = dictionary[@"title"];
         self.title = [dictionary objectForKey:@"title"];
-        self.note = [dictionary objectForKey:@"note"];
+        self.text = [dictionary objectForKey:@"note"];
         self.timeStamp = [dictionary objectForKey:@"timestamp"];
         
     }

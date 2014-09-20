@@ -37,21 +37,26 @@
                                                                                            target:self action:@selector(addDetailView:)];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
+    [self.tableView reloadData];
+}
+
 - (void)addDetailView:(UIBarButtonItem *) sender {
     
     DetailViewController *detailViewController = [DetailViewController new];
     [self.navigationController pushViewController:detailViewController animated:YES];
     
-    NSLog(@"I GOT HERE");
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     DetailViewController *detailViewController = [DetailViewController new];
     
-    NSDictionary *dict = [ESEntryController sharedInstance].entries[indexPath.row];
+    ESEntry *editEntry = [ESEntryController sharedInstance].entries[indexPath.row];
     
-    [detailViewController updateWithDictionary:dict];
+    [detailViewController updateEntry:editEntry];
     
     [self.navigationController pushViewController:detailViewController animated:YES];
     

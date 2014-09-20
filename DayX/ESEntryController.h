@@ -17,7 +17,8 @@
 
 - (void)addEntry:(ESEntry *)entry;
 - (void)removeEntry:(ESEntry *)entry;
-- (void)replaceEntry:(ESEntry *)oldEntry withEntry:(NSDictionary *)newEntry;
+- (void)replaceEntry:(ESEntry *)oldEntry withEntry:(ESEntry *)newEntry;
 - (void)loadFromDefaults;
+- (void)synchronize;
 
 @end
