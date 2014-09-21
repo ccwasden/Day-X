@@ -36,21 +36,40 @@ static NSString *textKey = @"text";
     self.detailTitle.delegate = self;
     self.detailText.delegate = self;
     
+    // Set up detailView if entry properties exist
     if (self.detailEntry.title != nil) {
         self.title = self.detailEntry.title;
         self.detailTitle.text = self.detailEntry.title;
-    
+        
     }
     else {
         self.detailTitle.placeholder = @"Title";
     }
     
-    self.detailText.text = self.detailEntry.text;
+    if (self.detailEntry.text != nil) {
+        self.detailText.text = self.detailEntry.text;
+    }
+    else {
+        //self.detailText.textColor = [UIColor lightGrayColor];
+        self.detailText.text = @"Notes...";
+    }
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.detailText.layer.borderWidth = 1.0f;
-    self.detailText.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.detailText.layer.cornerRadius = 8;
+
+    // Set which items will be editable first
+    if ([self.detailTitle.text isEqual:@""]) {
+        [self.detailTitle becomeFirstResponder];
+    }
+    else if ([self.detailText.text isEqual:@"Notes..."]){
+        [self.detailText setSelectedTextRange:[self.detailText
+                                               textRangeFromPosition:self.detailText.beginningOfDocument
+                                               toPosition:self.detailText.endOfDocument]];
+        [self.detailText becomeFirstResponder];
+    }
+    
+    
+    //self.view.backgroundColor = [UIColor blueColor];
+    //self.detailTitle.textColor = [UIColor whiteColor];
+    
     
 }
 
@@ -58,6 +77,7 @@ static NSString *textKey = @"text";
 - (IBAction)clearButton:(id)sender {
     
     self.detailTitle.text = @"";
+    self.detailTitle.placeholder = @"Title";
     self.detailText.text = @"";
     //[self save];
    
@@ -86,6 +106,12 @@ static NSString *textKey = @"text";
         [[ESEntryController sharedInstance] addEntry:newEntry];
     }
     else {
+        
+        // If we cleared it should it delete it?
+        if ([self.detailTitle.text isEqual:@""] && [self.detailText.text isEqual:@""]) {
+            [[ESEntryController sharedInstance] removeEntry:self.detailEntry];
+        }
+        
         // The entry already exists and we need to replace the old one with the new
         [[ESEntryController sharedInstance] replaceEntry:self.detailEntry withEntry:newEntry];
     }
@@ -99,19 +125,27 @@ static NSString *textKey = @"text";
 }
 
 
-
-/*
-- (void)textViewDidChange:(UITextView *)textView {
+- (void)textViewDidEndEditing:(UITextView *)textView {
     
-    //[self save];
+    if ([textView.text isEqual:@""]) {
+        textView.text = @"Notes...";
+    }
 }
-*/
+
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [self.detailTitle resignFirstResponder];
     
-    return YES;
+    if ([self.detailText.text isEqual:@"Notes..."]) {
+        [self.detailText setSelectedTextRange:[self.detailText
+                                               textRangeFromPosition:self.detailText.beginningOfDocument
+                                               toPosition:self.detailText.endOfDocument]];
+    }
+    [self.detailText becomeFirstResponder];
+    
+    return NO;
 }
 
 

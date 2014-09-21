@@ -43,7 +43,14 @@
     
     NSMutableArray *mutabaleEntries = [self.entries mutableCopy];
     
-    [mutabaleEntries addObject:entry];
+    if ([entry.title  isEqual: @""] && [entry.text  isEqual: @""]) {}
+    else if ([entry.title isEqual: @""]) {
+        entry.title = @"New Note";
+        [mutabaleEntries addObject:entry];
+    }
+    else {
+        [mutabaleEntries addObject:entry];
+    }
     
     self.entries = [mutabaleEntries copy];
     [self synchronize];
@@ -76,6 +83,25 @@
     
 }
 
+// Never could get this to work
+/*
+- (void)switchEntry:(ESEntry *)firstEntry withEntry:(ESEntry *)secondEntry {
+    
+    NSMutableArray *entries = [self.entries mutableCopy];
+    
+    NSUInteger index1 = [entries indexOfObject:firstEntry];
+    NSUInteger index2 = [entries indexOfObject:secondEntry];
+    
+    [entries replaceObjectAtIndex:index2 withObject:firstEntry];
+    [entries replaceObjectAtIndex:index1 withObject:secondEntry];
+    
+    self.entries = [entries copy];
+    [self synchronize];
+    
+    
+}
+ */
+
 - (void)loadFromDefaults {
     
     NSArray *entryDictionaries = [[NSUserDefaults standardUserDefaults] objectForKey:@"entries"];
@@ -100,9 +126,6 @@
     NSMutableArray *dictionaryEntries = [NSMutableArray new];
     
     for (ESEntry *entry in self.entries) {
-        
-        //NSDictionary *dictionaryFromEntry = [entry entryToDictionary];
-        //[dictionaryEntries addObject:dictionaryFromEntry];
         
         [dictionaryEntries addObject:[entry entryToDictionary]];
     }

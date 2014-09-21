@@ -24,7 +24,6 @@ static NSString *titleKey = @"title";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    
     ESEntry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
     
     cell.textLabel.text = entry.title;
@@ -51,5 +50,26 @@ static NSString *titleKey = @"title";
         [tableView reloadData];
     }
 }
+
+
+// This doesn't work...
+/*
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView
+        moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
+        toIndexPath:(NSIndexPath *)toIndexPath {
+    
+    ESEntry *firstEntry = [ESEntryController sharedInstance].entries[fromIndexPath.row];
+    ESEntry *secondEntry = [ESEntryController sharedInstance].entries[toIndexPath.row];
+    
+    [[ESEntryController sharedInstance] switchEntry:firstEntry withEntry:secondEntry];
+    
+}
+ */
+
 
 @end

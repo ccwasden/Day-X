@@ -22,6 +22,8 @@
     UINavigationController *navigationController = [[UINavigationController alloc]
                                                     initWithRootViewController:tableViewController];
     
+        [navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Medium" size:20]}];
+    
     self.window.rootViewController = navigationController;
     
     self.window.backgroundColor = [UIColor whiteColor];

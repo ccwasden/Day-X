@@ -28,6 +28,10 @@
     
     self.title = @"Day X";
     
+    UIBarButtonItem *backText = [UIBarButtonItem new];
+    backText.title = @"Back";
+    self.navigationItem.backBarButtonItem = backText;
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.dataSource = [DXListTableViewDataSource new];
     self.tableView.dataSource = self.dataSource;
@@ -66,6 +70,10 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.tableView.showsHorizontalScrollIndicator = YES;
+}
 
 
 - (void)didReceiveMemoryWarning {
