@@ -24,6 +24,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    self.title = @"Day X";
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.dataSource = [DXListTableViewDataSource new];
     self.tableView.dataSource = self.dataSource;
@@ -61,6 +65,8 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

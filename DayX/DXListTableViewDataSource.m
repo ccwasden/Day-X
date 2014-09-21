@@ -24,6 +24,7 @@ static NSString *titleKey = @"title";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
+    
     ESEntry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
     
     cell.textLabel.text = entry.title;
@@ -36,6 +37,19 @@ static NSString *titleKey = @"title";
     
     return [ESEntryController sharedInstance].entries.count;
     
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        
+        ESEntry *toRemove = [ESEntryController sharedInstance].entries[indexPath.row];
+        
+        [[ESEntryController sharedInstance] removeEntry:toRemove];
+        
+        [tableView reloadData];
+    }
 }
 
 @end
