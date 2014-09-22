@@ -72,29 +72,32 @@ static NSString *textKey = @"text";
         //self.detailText.textColor = [UIColor lightGrayColor];
         self.detailText.text = @"Notes...";
     }
+
     
     // Set up Color if entry properties exit;
-    if (self.detailEntry.color != nil) {
-        self.view.backgroundColor = self.detailEntry.color;
+    if (self.detailEntry.color != nil && self.detailEntry.color != [UIColor whiteColor]) {
+        //self.view.backgroundColor = self.detailEntry.color;
         
-        for (UIButton *button in self.buttons) {
-            if (button.backgroundColor == self.detailEntry.color) {
-                button.backgroundColor = [UIColor whiteColor];
+        UIButton* temp1Button = [UIButton new];
+        temp1Button.backgroundColor = self.detailEntry.color;
+        [self changeColor:temp1Button];
+        
+        // This doesn't work...
+        for (UIButton *tempButton in self.buttons) {
+            
+            if (tempButton.backgroundColor == self.detailEntry.color) {
+                [self changeColor:tempButton];
             }
         }
+        
     }
-    
-
-    // Set which items will be editable first
-    if ([self.detailText.text isEqual:@"Notes..."]){
-        [self.detailText setSelectedTextRange:[self.detailText
-                                               textRangeFromPosition:self.detailText.beginningOfDocument
-                                               toPosition:self.detailText.endOfDocument]];
-        [self.detailText becomeFirstResponder];
+    else {
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     
 }
+
 
 -(void)doneButton {
     
@@ -132,7 +135,6 @@ static NSString *textKey = @"text";
         textColor = [UIColor whiteColor];
         sender.backgroundColor = [UIColor whiteColor];
         
-        
     }
     
     self.view.backgroundColor = backColor;
@@ -159,7 +161,12 @@ static NSString *textKey = @"text";
     
     [self.detailTitle resignFirstResponder];
     
-    return NO;
+    [self.detailText setSelectedTextRange:[self.detailText
+                                           textRangeFromPosition:self.detailText.beginningOfDocument
+                                           toPosition:self.detailText.endOfDocument]];
+    [self.detailText becomeFirstResponder];
+    
+    return YES;
 }
 
 
@@ -181,6 +188,7 @@ static NSString *textKey = @"text";
     ESEntry *newEntry = [ESEntry new];
     newEntry.title = self.detailTitle.text;
     newEntry.text = self.detailText.text;
+    newEntry.color = self.view.backgroundColor;
     
     if (self.detailEntry == nil) {
         // We need to add a new entry to ESEntryController

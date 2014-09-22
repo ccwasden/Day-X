@@ -11,8 +11,6 @@
 @interface ESEntryController ()
 
 @property (nonatomic, strong) NSArray *entries;
-@property (nonatomic, strong) UIColor *favoriteColor;
-@property (nonatomic, strong) NSNumber *favoriteNumber;
 
 @end
 
@@ -43,9 +41,10 @@
     
     NSMutableArray *mutabaleEntries = [self.entries mutableCopy];
     
+    // Don't save the note if nothing was changed
     if ([entry.title  isEqual: @""] && [entry.text  isEqual: @"Notes..."]) {}
     else if ([entry.title isEqual: @""]) {
-        /*
+        /* Save note with date?
          NSDate *date = [NSDate new];
          entry.title = [NSString stringWithFormat:@"New Note %@",date];
          */

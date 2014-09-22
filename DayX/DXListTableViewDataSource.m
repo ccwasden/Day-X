@@ -27,7 +27,10 @@ static NSString *titleKey = @"title";
     ESEntry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
     
     cell.textLabel.text = entry.title;
-
+    cell.backgroundColor = entry.color;
+    if (entry.color != [UIColor whiteColor]) {
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
     
     return cell;
 }

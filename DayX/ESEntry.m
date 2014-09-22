@@ -24,7 +24,8 @@
     }
     
     if (self.color != nil) {
-        dictionary[@"color"] = self.color;
+        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:self.color];
+        dictionary[@"color"] = colorData;
     }
     
     /*
@@ -47,7 +48,9 @@
         
         self.title = [dictionary objectForKey:@"title"];
         self.text = [dictionary objectForKey:@"note"];
-        self.color = [dictionary objectForKey:@"color"];
+        
+        NSData *colorData = [dictionary objectForKey:@"color"];
+        self.color = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
         
         //self.timeStamp = [dictionary objectForKey:@"timestamp"];
         

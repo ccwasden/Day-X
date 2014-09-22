@@ -12,7 +12,6 @@
 
 @interface DetailViewController : UIViewController
 
-//- (void)updateWithDictionary:(NSDictionary *)dictionary;
 - (void)updateEntry:(ESEntry *)entry;
 
 @end

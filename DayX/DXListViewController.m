@@ -24,25 +24,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    
     self.title = @"Day X";
     
     UIBarButtonItem *backText = [UIBarButtonItem new];
     backText.title = @"Back";
     self.navigationItem.backBarButtonItem = backText;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                           target:self action:@selector(addDetailView:)];
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.dataSource = [DXListTableViewDataSource new];
     self.tableView.dataSource = self.dataSource;
     [self.dataSource registerTableView:self.tableView];
-    
     self.tableView.delegate = self;
-    
     [self.view addSubview:self.tableView];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                           target:self action:@selector(addDetailView:)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
