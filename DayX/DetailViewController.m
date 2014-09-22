@@ -24,6 +24,7 @@ static NSString *textKey = @"text";
 @property (strong, nonatomic) IBOutlet UITextField *detailTitle;
 @property (strong, nonatomic) IBOutlet UITextView *detailText;
 @property (strong, nonatomic) IBOutlet UILabel *detailSpacer;
+@property (strong, nonatomic) IBOutlet UILabel *detailSpacer2;
 
 @property (strong, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) IBOutlet UIButton *button0;
@@ -45,8 +46,15 @@ static NSString *textKey = @"text";
     
     self.detailTitle.delegate = self;
     self.detailText.delegate = self;
+
     
-    // Set up detailView if entry properties exist
+    UIBarButtonItem *doneButton = [UIBarButtonItem new];
+    doneButton.title = @"Done";
+    doneButton.target = self;
+    doneButton.action = @selector(doneButton);
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+    // Set up Title if entry properties exist
     if (self.detailEntry.title != nil) {
         self.title = self.detailEntry.title;
         self.detailTitle.text = self.detailEntry.title;
@@ -56,12 +64,24 @@ static NSString *textKey = @"text";
         self.detailTitle.placeholder = @"Title";
     }
     
+    // Set up Body text if entry properties exist
     if (self.detailEntry.text != nil) {
         self.detailText.text = self.detailEntry.text;
     }
     else {
         //self.detailText.textColor = [UIColor lightGrayColor];
         self.detailText.text = @"Notes...";
+    }
+    
+    // Set up Color if entry properties exit;
+    if (self.detailEntry.color != nil) {
+        self.view.backgroundColor = self.detailEntry.color;
+        
+        for (UIButton *button in self.buttons) {
+            if (button.backgroundColor == self.detailEntry.color) {
+                button.backgroundColor = [UIColor whiteColor];
+            }
+        }
     }
     
 
@@ -74,6 +94,12 @@ static NSString *textKey = @"text";
     }
     
     
+}
+
+-(void)doneButton {
+    
+    [self.detailText resignFirstResponder];
+    [self.detailTitle resignFirstResponder];
 }
 
 
@@ -115,7 +141,7 @@ static NSString *textKey = @"text";
     self.detailText.backgroundColor = backColor;
     self.detailText.textColor = textColor;
     self.detailSpacer.backgroundColor = textColor;
-    
+    self.detailSpacer2.backgroundColor = textColor;
 }
 
 

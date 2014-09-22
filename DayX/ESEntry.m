@@ -22,11 +22,17 @@
     if (self.text != nil) {
         dictionary[@"note"] = self.text;
     }
+    
+    if (self.color != nil) {
+        dictionary[@"color"] = self.color;
+    }
+    
     /*
     if (self.timeStamp != nil) {
         dictionary[@"timestamp"] = self.timeStamp;
     }
     */
+    
     return dictionary.copy;
 }
 
@@ -41,6 +47,8 @@
         
         self.title = [dictionary objectForKey:@"title"];
         self.text = [dictionary objectForKey:@"note"];
+        self.color = [dictionary objectForKey:@"color"];
+        
         //self.timeStamp = [dictionary objectForKey:@"timestamp"];
         
     }

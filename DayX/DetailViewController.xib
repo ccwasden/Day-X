@@ -12,6 +12,7 @@
                 <outlet property="button2" destination="uFa-rS-XPc" id="5EK-Ez-21L"/>
                 <outlet property="button3" destination="pMN-eX-8c3" id="QYw-4f-JZY"/>
                 <outlet property="detailSpacer" destination="BjA-Vp-efd" id="5nx-dk-JIf"/>
+                <outlet property="detailSpacer2" destination="ap9-7H-8E8" id="pp4-qe-bV3"/>
                 <outlet property="detailText" destination="T6M-bG-PjR" id="tz9-7P-xgA"/>
                 <outlet property="detailTitle" destination="Z6t-qV-gRh" id="1AU-JS-n0H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -56,6 +57,16 @@
                         <action selector="changeColor:" destination="-1" eventType="touchUpInside" id="5bO-cF-TUG"/>
                     </connections>
                 </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hx-Qf-8Vb">
+                    <rect key="frame" x="99" y="442" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.13909558036627201" green="0.55344784864450003" blue="0.85132575757575757" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeColor:" destination="-1" eventType="touchUpInside" id="cME-X0-sz9"/>
+                    </connections>
+                </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFa-rS-XPc">
                     <rect key="frame" x="171" y="442" width="46" height="30"/>
                     <color key="backgroundColor" red="1" green="0.48380531308679375" blue="0.076131359808533805" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,16 +87,13 @@
                         <action selector="changeColor:" destination="-1" eventType="touchUpInside" id="mwb-fs-9J1"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hx-Qf-8Vb">
-                    <rect key="frame" x="99" y="442" width="46" height="30"/>
-                    <color key="backgroundColor" red="0.13909558036627201" green="0.55344784864450003" blue="0.85132575757575757" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="changeColor:" destination="-1" eventType="touchUpInside" id="cME-X0-sz9"/>
-                    </connections>
-                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ap9-7H-8E8">
+                    <rect key="frame" x="8" y="432" width="538" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

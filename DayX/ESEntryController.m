@@ -43,8 +43,12 @@
     
     NSMutableArray *mutabaleEntries = [self.entries mutableCopy];
     
-    if ([entry.title  isEqual: @""] && [entry.text  isEqual: @""]) {}
+    if ([entry.title  isEqual: @""] && [entry.text  isEqual: @"Notes..."]) {}
     else if ([entry.title isEqual: @""]) {
+        /*
+         NSDate *date = [NSDate new];
+         entry.title = [NSString stringWithFormat:@"New Note %@",date];
+         */
         entry.title = @"New Note";
         [mutabaleEntries addObject:entry];
     }
@@ -83,7 +87,7 @@
     
 }
 
-// Never could get this to work
+
 /*
 - (void)switchEntry:(ESEntry *)firstEntry withEntry:(ESEntry *)secondEntry {
     
