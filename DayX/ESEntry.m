@@ -22,11 +22,11 @@
     if (self.text != nil) {
         dictionary[@"note"] = self.text;
     }
-    
+    /*
     if (self.timeStamp != nil) {
         dictionary[@"timestamp"] = self.timeStamp;
     }
-    
+    */
     return dictionary.copy;
 }
 
@@ -36,10 +36,12 @@
     self = [super init];
     if (self != nil) {
         
-        //self.title = dictionary[@"title"];
+        //self.title = dictionary[@"title"]; // alternative method
+        
+        
         self.title = [dictionary objectForKey:@"title"];
         self.text = [dictionary objectForKey:@"note"];
-        self.timeStamp = [dictionary objectForKey:@"timestamp"];
+        //self.timeStamp = [dictionary objectForKey:@"timestamp"];
         
     }
     return self;

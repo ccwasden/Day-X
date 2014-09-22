@@ -12,7 +12,8 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) NSDate *timeStamp;
+@property (nonatomic, strong) UIColor *color;
+//@property (nonatomic, strong) NSDate *timeStamp;
 
 -(NSDictionary *)entryToDictionary;
 -(id)initWithDictionary:(NSDictionary *)dictionary;

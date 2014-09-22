@@ -18,7 +18,7 @@
 - (void)addEntry:(ESEntry *)entry;
 - (void)removeEntry:(ESEntry *)entry;
 - (void)replaceEntry:(ESEntry *)oldEntry withEntry:(ESEntry *)newEntry;
-- (void)switchEntry:(ESEntry *)firstEntry withEntry:(ESEntry *)secondEntry;
+//- (void)switchEntry:(ESEntry *)firstEntry withEntry:(ESEntry *)secondEntry;
 - (void)loadFromDefaults;
 - (void)synchronize;
 

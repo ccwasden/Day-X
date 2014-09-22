@@ -19,10 +19,18 @@ static NSString *textKey = @"text";
 @interface DetailViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) ESEntry *detailEntry;
+@property (strong, nonatomic) UIColor *buttonColor;
 
 @property (strong, nonatomic) IBOutlet UITextField *detailTitle;
 @property (strong, nonatomic) IBOutlet UITextView *detailText;
-@property (strong, nonatomic) IBOutlet UIButton *clearButton;
+@property (strong, nonatomic) IBOutlet UILabel *detailSpacer;
+
+@property (strong, nonatomic) NSArray *buttons;
+@property (strong, nonatomic) IBOutlet UIButton *button0;
+@property (strong, nonatomic) IBOutlet UIButton *button1;
+@property (strong, nonatomic) IBOutlet UIButton *button2;
+@property (strong, nonatomic) IBOutlet UIButton *button3;
+
 
 @end
 
@@ -32,6 +40,8 @@ static NSString *textKey = @"text";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.buttons = @[self.button0, self.button1, self.button2, self.button3];
     
     self.detailTitle.delegate = self;
     self.detailText.delegate = self;
@@ -56,10 +66,7 @@ static NSString *textKey = @"text";
     
 
     // Set which items will be editable first
-    if ([self.detailTitle.text isEqual:@""]) {
-        [self.detailTitle becomeFirstResponder];
-    }
-    else if ([self.detailText.text isEqual:@"Notes..."]){
+    if ([self.detailText.text isEqual:@"Notes..."]){
         [self.detailText setSelectedTextRange:[self.detailText
                                                textRangeFromPosition:self.detailText.beginningOfDocument
                                                toPosition:self.detailText.endOfDocument]];
@@ -67,26 +74,74 @@ static NSString *textKey = @"text";
     }
     
     
-    //self.view.backgroundColor = [UIColor blueColor];
-    //self.detailTitle.textColor = [UIColor whiteColor];
-    
-    
 }
 
 
-- (IBAction)clearButton:(id)sender {
+- (IBAction)changeColor:(UIButton*)sender {
     
-    self.detailTitle.text = @"";
-    self.detailTitle.placeholder = @"Title";
-    self.detailText.text = @"";
-    //[self save];
-   
+    UIColor *backColor = [UIColor new];
+    UIColor *textColor = [UIColor new];
+    
+    if ([sender backgroundColor] == [UIColor whiteColor]) {
+        
+        sender.backgroundColor = self.buttonColor;
+        backColor = [UIColor whiteColor];
+        textColor = [UIColor darkTextColor];
+    }
+    else {
+        
+        if (self.view.backgroundColor != [UIColor whiteColor]) {
+            
+            for (UIButton *button in self.buttons) {
+                
+                if (button.backgroundColor == [UIColor whiteColor]) {
+                    button.backgroundColor = self.buttonColor;
+                }
+            }
+    
+        }
+        
+        self.buttonColor = [sender backgroundColor];
+        backColor = [sender backgroundColor];
+        textColor = [UIColor whiteColor];
+        sender.backgroundColor = [UIColor whiteColor];
+        
+        
+    }
+    
+    self.view.backgroundColor = backColor;
+    self.detailTitle.backgroundColor = backColor;
+    self.detailTitle.textColor = textColor;
+    self.detailText.backgroundColor = backColor;
+    self.detailText.textColor = textColor;
+    self.detailSpacer.backgroundColor = textColor;
+    
 }
 
 
 - (void)updateEntry:(ESEntry *)entry {
     
     self.detailEntry = entry;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField  {
+    
+    self.title = textField.text;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [self.detailTitle resignFirstResponder];
+    
+    return NO;
+}
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    if ([textView.text isEqual:@""]) {
+        textView.text = @"Notes...";
+    }
 }
 
 
@@ -117,37 +172,6 @@ static NSString *textKey = @"text";
     }
     
 }
-
-
--(void)textFieldDidEndEditing:(UITextField *)textField  {
-    
-    self.title = textField.text;
-}
-
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    
-    if ([textView.text isEqual:@""]) {
-        textView.text = @"Notes...";
-    }
-}
-
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    [self.detailTitle resignFirstResponder];
-    
-    if ([self.detailText.text isEqual:@"Notes..."]) {
-        [self.detailText setSelectedTextRange:[self.detailText
-                                               textRangeFromPosition:self.detailText.beginningOfDocument
-                                               toPosition:self.detailText.endOfDocument]];
-    }
-    [self.detailText becomeFirstResponder];
-    
-    return NO;
-}
-
 
 
 - (void)didReceiveMemoryWarning {
