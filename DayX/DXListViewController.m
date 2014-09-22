@@ -24,10 +24,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"Day X";
+    self.title = @"Quick Note";
     
     UIBarButtonItem *backText = [UIBarButtonItem new];
-    backText.title = @"Back";
+    backText.title = @"";
     self.navigationItem.backBarButtonItem = backText;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
@@ -42,19 +42,46 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    
+    /*
+    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc]
+                                         initWithTarget:self action:@selector(handleSwipe:)];
+    
+    [gesture setDirection:UISwipeGestureRecognizerDirectionDown];
+    
+    [self.tableView addGestureRecognizer:gesture];
+    */
 }
 
+/*
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipeDirection {
+    
+    NSLog(@"HERE");
+    
+    DetailViewController *detailViewController = [DetailViewController new];
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    
+    NSLog(@"HERE1");
+}
+*/
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 70;
+}
+
+    
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
     [self.tableView reloadData];
 }
 
-- (void)addDetailView:(UIBarButtonItem *) sender {
+- (void)addDetailView:(UIButton *) sender {
     
     DetailViewController *detailViewController = [DetailViewController new];
     [self.navigationController pushViewController:detailViewController animated:YES];
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -73,6 +100,7 @@
     
     self.tableView.showsHorizontalScrollIndicator = YES;
 }
+
 
 
 - (void)didReceiveMemoryWarning {

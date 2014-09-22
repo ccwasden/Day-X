@@ -46,7 +46,8 @@ static NSString *textKey = @"text";
     
     self.detailTitle.delegate = self;
     self.detailText.delegate = self;
-
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *doneButton = [UIBarButtonItem new];
     doneButton.title = @"Done";
@@ -69,8 +70,7 @@ static NSString *textKey = @"text";
         self.detailText.text = self.detailEntry.text;
     }
     else {
-        //self.detailText.textColor = [UIColor lightGrayColor];
-        self.detailText.text = @"Notes...";
+        [self.detailText becomeFirstResponder];
     }
 
     
@@ -90,9 +90,6 @@ static NSString *textKey = @"text";
             }
         }
         
-    }
-    else {
-        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     
@@ -164,19 +161,19 @@ static NSString *textKey = @"text";
     [self.detailText setSelectedTextRange:[self.detailText
                                            textRangeFromPosition:self.detailText.beginningOfDocument
                                            toPosition:self.detailText.endOfDocument]];
-    [self.detailText becomeFirstResponder];
+    [self.detailText becomeFirstResponder]; // for some reason selects the second line
     
     return YES;
 }
 
-
+/*
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
     if ([textView.text isEqual:@""]) {
-        textView.text = @"Notes...";
+        //textView.text = @"Notes...";
     }
 }
-
+*/
 
 - (void)viewWillDisappear:(BOOL)animated {
     

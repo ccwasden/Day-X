@@ -22,7 +22,7 @@
     UINavigationController *navigationController = [[UINavigationController alloc]
                                                     initWithRootViewController:tableViewController];
     
-        [navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Medium" size:20]}];
+        [navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Light" size:25]}];
     
     self.window.rootViewController = navigationController;
     
@@ -30,6 +30,7 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -7,6 +7,7 @@
 //
 
 #import "DXListTableViewDataSource.h"
+#import "DXListViewController.h"
 #import "ESEntryController.h"
 #import "ESEntry.h"
 
@@ -26,11 +27,14 @@ static NSString *titleKey = @"title";
     
     ESEntry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
     
+    
     cell.textLabel.text = entry.title;
     cell.backgroundColor = entry.color;
     if (entry.color != [UIColor whiteColor]) {
         cell.textLabel.textColor = [UIColor whiteColor];
     }
+    
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25];
     
     return cell;
 }
@@ -41,8 +45,9 @@ static NSString *titleKey = @"title";
     
 }
 
-// Override to support editing the table view.
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
         
@@ -52,7 +57,9 @@ static NSString *titleKey = @"title";
         
         [tableView reloadData];
     }
+
 }
+ 
 
 
 // This doesn't work...
