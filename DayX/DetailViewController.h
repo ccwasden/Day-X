@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ESEntry.h"
+#import "Entry.h"
 
 @interface DetailViewController : UIViewController
 
-- (void)updateEntry:(ESEntry *)entry;
+- (void)updateEntry:(Entry *)entry;
 
 @end

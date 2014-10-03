@@ -9,7 +9,7 @@
 #import "DXListTableViewDataSource.h"
 #import "DXListViewController.h"
 #import "ESEntryController.h"
-#import "ESEntry.h"
+#import "Entry.h"
 
 static NSString *titleKey = @"title";
 
@@ -24,10 +24,10 @@ static NSString *titleKey = @"title";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ESEntry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
+    Entry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.backgroundColor = entry.color;
+    //cell.backgroundColor = entry.color;
     cell.textLabel.text = entry.title;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25];
     
@@ -38,10 +38,11 @@ static NSString *titleKey = @"title";
     self.summary.textAlignment = NSTextAlignmentRight;
      */
     
-    if (entry.color != [UIColor whiteColor]) {
-        cell.textLabel.textColor = [UIColor whiteColor];
-        //self.summary.textColor = [UIColor whiteColor];
-    }
+    
+//    if (entry.color != [UIColor whiteColor]) {
+//        cell.textLabel.textColor = [UIColor whiteColor];
+//        //self.summary.textColor = [UIColor whiteColor];
+//    }
     
     //[cell addSubview:self.summary];
     
@@ -59,7 +60,7 @@ static NSString *titleKey = @"title";
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        ESEntry *toRemove = [ESEntryController sharedInstance].entries[indexPath.row];
+        Entry *toRemove = [ESEntryController sharedInstance].entries[indexPath.row];
         
         [[ESEntryController sharedInstance] removeEntry:toRemove];
         

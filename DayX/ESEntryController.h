@@ -7,19 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ESEntry.h"
+#import "Entry.h"
 
 @interface ESEntryController : NSObject
 
-@property (nonatomic, strong, readonly) NSArray *entries;
-
 + (ESEntryController *)sharedInstance;
 
-- (void)addEntry:(ESEntry *)entry;
-- (void)removeEntry:(ESEntry *)entry;
-- (void)replaceEntry:(ESEntry *)oldEntry withEntry:(ESEntry *)newEntry;
-//- (void)switchEntry:(ESEntry *)firstEntry withEntry:(ESEntry *)secondEntry;
-- (void)loadFromDefaults;
+- (void)addEntryWithTitle:(NSString *)title text:(NSString *)text date:(NSDate *)date;
+- (void)removeEntry:(Entry *)entry;
 - (void)synchronize;
+- (NSArray *)entries;
 
 @end

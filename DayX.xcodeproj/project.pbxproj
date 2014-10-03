@@ -133,11 +133,6 @@
 		711A506F19388095005642EF /* DayX */ = {
 			isa = PBXGroup;
 			children = (
-				BE650B5A19DE27D800BFDB78 /* Model.xcdatamodeld */,
-				BE650B6319DE331800BFDB78 /* Stack.h */,
-				BE650B6419DE331800BFDB78 /* Stack.m */,
-				BE650B5D19DE2A8100BFDB78 /* Entry.h */,
-				BE650B5E19DE2A8100BFDB78 /* Entry.m */,
 				711A507819388095005642EF /* DXAppDelegate.h */,
 				711A507919388095005642EF /* DXAppDelegate.m */,
 				BE049DD319CDEFCE002DB21C /* DXListViewController.h */,
@@ -146,8 +141,13 @@
 				BE2A8AB419CBC96B00155F95 /* DXListTableViewDataSource.m */,
 				BE64EB6F19C920AB004DD138 /* DetailViewController.h */,
 				BE64EB7019C920AB004DD138 /* DetailViewController.m */,
+				BE650B5A19DE27D800BFDB78 /* Model.xcdatamodeld */,
+				BE650B6319DE331800BFDB78 /* Stack.h */,
+				BE650B6419DE331800BFDB78 /* Stack.m */,
 				BE049DCF19CDEF77002DB21C /* ESEntryController.h */,
 				BE049DD019CDEF77002DB21C /* ESEntryController.m */,
+				BE650B5D19DE2A8100BFDB78 /* Entry.h */,
+				BE650B5E19DE2A8100BFDB78 /* Entry.m */,
 				BE64EB7119C920AB004DD138 /* DetailViewController.xib */,
 				711A507B19388095005642EF /* Images.xcassets */,
 				711A507019388095005642EF /* Supporting Files */,

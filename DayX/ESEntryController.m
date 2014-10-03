@@ -7,136 +7,61 @@
 //
 
 #import "ESEntryController.h"
+#import "Stack.h"
 
 @interface ESEntryController ()
-
-@property (nonatomic, strong) NSArray *entries;
 
 @end
 
 @implementation ESEntryController
-
-- (id)init {
-    self = [super init];
-    
-    self.entries = @[];
-    
-    return self;
-}
 
 + (ESEntryController *)sharedInstance {
     static ESEntryController *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[ESEntryController alloc] init];
-        
-        //sharedInstance.entries = @[];
-        
-        [sharedInstance loadFromDefaults];
     });
     return sharedInstance;
 }
 
-- (void)addEntry:(ESEntry *)entry {
+- (NSArray *)entries {
     
-    NSMutableArray *mutabaleEntries = [self.entries mutableCopy];
+    //THIS REQUEST IS HOW YOU GET OBJECTS
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Entry"];
+    NSArray *array = [[Stack sharedInstance].managedObjectContext executeFetchRequest:request error:nil];
     
-    // Don't save the note if nothing was changed
-    if ([entry.title  isEqual: @""] && [entry.text  isEqual: @""]) {}
-    else if ([entry.title isEqual: @""]) {
-        /* Save note with date?
-         NSDate *date = [NSDate new];
-         entry.title = [NSString stringWithFormat:@"New Note %@",date];
-         */
-        entry.title = @"New Note";
-        [mutabaleEntries addObject:entry];
-    }
-    else {
-        [mutabaleEntries addObject:entry];
-    }
+    return array;
+}
+
+- (void)addEntryWithTitle:(NSString *)title text:(NSString *)text date:(NSDate *)date {
     
-    self.entries = [mutabaleEntries copy];
+    //THIS IS HOW YOU CREATE A NEW INSTANCE IN YOUR MANAGED OBJECT CONTEXT
+    Entry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"Entry" inManagedObjectContext:[Stack sharedInstance].managedObjectContext];
+    
+    entry.title = title;
+    entry.text = text;
+    entry.timestamp = date;
+    
     [self synchronize];
-    
 }
 
-- (void)removeEntry:(ESEntry *)entry {
+- (void)removeEntry:(Entry *)entry {
     
-    NSMutableArray *mutableEntries = [self.entries mutableCopy];
+    [[Stack sharedInstance].managedObjectContext deleteObject:entry];
     
-    [mutableEntries removeObject:entry];
+    // [entry.managedObjectContext deleteObject:entry]; // Safer for multiple managedObjectContexts
     
-    self.entries = [mutableEntries copy];
     [self synchronize];
-    
-}
-
-- (void)replaceEntry:(ESEntry *)oldEntry withEntry:(ESEntry *)newEntry {
-    
-    if ([self.entries containsObject:oldEntry]) {
-        
-        NSMutableArray *mutableEntries = [self.entries mutableCopy];
-        
-        NSUInteger index = [mutableEntries indexOfObject:oldEntry];
-        [mutableEntries replaceObjectAtIndex:index withObject:newEntry];
-        
-        self.entries = [mutableEntries copy];
-        [self synchronize];
-    }
-    
-}
-
-
-/*
-- (void)switchEntry:(ESEntry *)firstEntry withEntry:(ESEntry *)secondEntry {
-    
-    NSMutableArray *entries = [self.entries mutableCopy];
-    
-    NSUInteger index1 = [entries indexOfObject:firstEntry];
-    NSUInteger index2 = [entries indexOfObject:secondEntry];
-    
-    [entries replaceObjectAtIndex:index2 withObject:firstEntry];
-    [entries replaceObjectAtIndex:index1 withObject:secondEntry];
-    
-    self.entries = [entries copy];
-    [self synchronize];
-    
-    
-}
- */
-
-- (void)loadFromDefaults {
-    
-    NSArray *entryDictionaries = [[NSUserDefaults standardUserDefaults] objectForKey:@"entries"];
-    
-    NSMutableArray *entries = [NSMutableArray new];
-    
-    for (int i = 0; i < entryDictionaries.count; i++) {
-        
-        NSDictionary * dictionary = entryDictionaries[i];
-        ESEntry *entry = [[ESEntry alloc] initWithDictionary:dictionary];
-        [entries addObject:entry];
-    }
-    
-    if (entries) {
-        self.entries = entries;
-    }
     
 }
 
 - (void)synchronize {
     
-    NSMutableArray *dictionaryEntries = [NSMutableArray new];
-    
-    for (ESEntry *entry in self.entries) {
-        
-        [dictionaryEntries addObject:[entry entryToDictionary]];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:dictionaryEntries forKey:@"entries"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[Stack sharedInstance].managedObjectContext save:nil];
     
 }
+
+
 
 @end
 

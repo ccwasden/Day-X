@@ -8,17 +8,17 @@
 
 #import "DetailViewController.h"
 #import "ESEntryController.h"
-#import "ESEntry.h"
+#import "Entry.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-static NSString *entryKey = @"entry";
-static NSString *titleKey = @"title";
-static NSString *textKey = @"text";
+//static NSString *entryKey = @"entry";
+//static NSString *titleKey = @"title";
+//static NSString *textKey = @"text";
 
 @interface DetailViewController () <UITextFieldDelegate, UITextViewDelegate>
 
-@property (strong, nonatomic) ESEntry *detailEntry;
+@property (strong, nonatomic) Entry *detailEntry;
 @property (strong, nonatomic) UIColor *buttonColor;
 @property (assign, nonatomic) NSInteger buttonTag;
 
@@ -83,23 +83,23 @@ static NSString *textKey = @"text";
     
     self.buttons = @[self.button0, self.button1, self.button2, self.button3];
     // Set up Color if entry properties exit;
-    if (self.detailEntry.color != nil && self.detailEntry.color != [UIColor whiteColor]) {
-        //self.view.backgroundColor = self.detailEntry.color;
-        
-        UIButton* temp1Button = [UIButton new];
-        temp1Button.backgroundColor = self.detailEntry.color;
-        [self changeColor:temp1Button];
-        
-        // This doesn't work...
-        /*
-        for (UIButton *tempButton in self.buttons) {
-            
-            if (tempButton.backgroundColor == self.detailEntry.color) {
-                [self changeColor:tempButton];
-            }
-        }
-        */
-    }
+//    if (self.detailEntry.color != nil && self.detailEntry.color != [UIColor whiteColor]) {
+//        //self.view.backgroundColor = self.detailEntry.color;
+//        
+//        UIButton* temp1Button = [UIButton new];
+//        temp1Button.backgroundColor = self.detailEntry.color;
+//        [self changeColor:temp1Button];
+//        
+//        // This doesn't work...
+//        /*
+//        for (UIButton *tempButton in self.buttons) {
+//            
+//            if (tempButton.backgroundColor == self.detailEntry.color) {
+//                [self changeColor:tempButton];
+//            }
+//        }
+//        */
+//    }
     
     /*
     CGFloat height = _button0.frame.size.height + (CGFloat)10;
@@ -241,7 +241,7 @@ static NSString *textKey = @"text";
 }
 
 
-- (void)updateEntry:(ESEntry *)entry {
+- (void)updateEntry:(Entry *)entry {
     
     self.detailEntry = entry;
 }
@@ -280,14 +280,23 @@ static NSString *textKey = @"text";
 
 - (void)save {
     
-    ESEntry *newEntry = [ESEntry new];
-    newEntry.title = self.detailTitle.text;
-    newEntry.text = self.detailText.text;
-    newEntry.color = self.view.backgroundColor;
+//    Entry *newEntry = [Entry new];
+//    
+//    newEntry.title = self.detailTitle.text;
+//    newEntry.text = self.detailText.text;
+//    newEntry.timestamp = [NSDate new];
+    //newEntry.color = self.view.backgroundColor;
+    
+    NSDate *timestamp = [NSDate new];
     
     if (self.detailEntry == nil) {
         // We need to add a new entry to ESEntryController
-        [[ESEntryController sharedInstance] addEntry:newEntry];
+        
+        //Entry *newEntry = [Entry alloc] initWithEntity:<#(NSEntityDescription *)#> insertIntoManagedObjectContext:<#(NSManagedObjectContext *)#>
+        
+        
+        
+        [[ESEntryController sharedInstance] addEntryWithTitle:_detailTitle.text text:_detailText.text date:timestamp];
     }
     else {
         
@@ -296,26 +305,18 @@ static NSString *textKey = @"text";
             [[ESEntryController sharedInstance] removeEntry:self.detailEntry];
         }
         
+        _detailEntry.title = _detailTitle.text;
+        _detailEntry.text = _detailText.text;
+        _detailEntry.timestamp = timestamp;
+        
+        
         // The entry already exists and we need to replace the old one with the new
-        [[ESEntryController sharedInstance] replaceEntry:self.detailEntry withEntry:newEntry];
+        //self.detailEntry = newEntry;
+        
+        [[ESEntryController sharedInstance] synchronize];
     }
     
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
