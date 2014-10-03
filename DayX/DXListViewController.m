@@ -30,8 +30,10 @@
     backText.title = @"";
     self.navigationItem.backBarButtonItem = backText;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:
+                                                                                            UIBarButtonSystemItemCompose
                                                                                            target:self action:@selector(addDetailView:)];
+
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.dataSource = [DXListTableViewDataSource new];
@@ -43,45 +45,39 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
+    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [swipeDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [self.view addGestureRecognizer:swipeDown];
     
-    /*
-    UISwipeGestureRecognizer *gesture = [[UISwipeGestureRecognizer alloc]
-                                         initWithTarget:self action:@selector(handleSwipe:)];
-    
-    [gesture setDirection:UISwipeGestureRecognizerDirectionDown];
-    
-    [self.tableView addGestureRecognizer:gesture];
-    */
 }
 
-/*
-- (void)handleSwipe:(UISwipeGestureRecognizer *)swipeDirection {
+
+- (void)handleGesture:(UISwipeGestureRecognizer *)swipeDirection {
     
     NSLog(@"HERE");
     
     DetailViewController *detailViewController = [DetailViewController new];
     [self.navigationController pushViewController:detailViewController animated:YES];
     
-    NSLog(@"HERE1");
 }
-*/
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 70;
+    return 65;
 }
 
     
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    
     [self.tableView reloadData];
 }
 
-- (void)addDetailView:(UIButton *) sender {
+- (void)addDetailView:(id) sender {
     
     DetailViewController *detailViewController = [DetailViewController new];
     [self.navigationController pushViewController:detailViewController animated:YES];
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -20,6 +20,10 @@ static NSString *textKey = @"text";
 
 @property (strong, nonatomic) ESEntry *detailEntry;
 @property (strong, nonatomic) UIColor *buttonColor;
+@property (assign, nonatomic) NSInteger buttonTag;
+
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
+@property (strong, nonatomic) UIBarButtonItem *settingsButton;
 
 @property (strong, nonatomic) IBOutlet UITextField *detailTitle;
 @property (strong, nonatomic) IBOutlet UITextView *detailText;
@@ -42,18 +46,19 @@ static NSString *textKey = @"text";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.buttons = @[self.button0, self.button1, self.button2, self.button3];
-    
     self.detailTitle.delegate = self;
     self.detailText.delegate = self;
     
     self.view.backgroundColor = [UIColor whiteColor];
+    _buttonTag = 0;
     
-    UIBarButtonItem *doneButton = [UIBarButtonItem new];
-    doneButton.title = @"Done";
-    doneButton.target = self;
-    doneButton.action = @selector(doneButton);
-    self.navigationItem.rightBarButtonItem = doneButton;
+    _doneButton = [UIBarButtonItem new];
+    _doneButton.title = @"Done";
+    _doneButton.target = self;
+    _doneButton.action = @selector(done);
+    
+    //_settingsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(settings)];
+    self.navigationItem.rightBarButtonItem = _doneButton;
     
     // Set up Title if entry properties exist
     if (self.detailEntry.title != nil) {
@@ -63,6 +68,7 @@ static NSString *textKey = @"text";
     }
     else {
         self.detailTitle.placeholder = @"Title";
+        self.navigationItem.title = @"New Note";
     }
     
     // Set up Body text if entry properties exist
@@ -72,8 +78,10 @@ static NSString *textKey = @"text";
     else {
         [self.detailText becomeFirstResponder];
     }
-
     
+    
+    
+    self.buttons = @[self.button0, self.button1, self.button2, self.button3];
     // Set up Color if entry properties exit;
     if (self.detailEntry.color != nil && self.detailEntry.color != [UIColor whiteColor]) {
         //self.view.backgroundColor = self.detailEntry.color;
@@ -83,20 +91,97 @@ static NSString *textKey = @"text";
         [self changeColor:temp1Button];
         
         // This doesn't work...
+        /*
         for (UIButton *tempButton in self.buttons) {
             
             if (tempButton.backgroundColor == self.detailEntry.color) {
                 [self changeColor:tempButton];
             }
         }
-        
+        */
     }
     
+    /*
+    CGFloat height = _button0.frame.size.height + (CGFloat)10;
+    CGFloat width = self.view.frame.size.width * 2;
+    
+    
+    UIScrollView *scrollMenu = [[UIScrollView alloc] initWithFrame:
+                                CGRectMake(0, self.view.frame.size.height - height, width, height)];
+    [scrollMenu addSubview:_button0];
+    [scrollMenu addSubview:_button1];
+    [scrollMenu addSubview:_button2];
+    [scrollMenu addSubview:_button3];
+    
+    scrollMenu.backgroundColor = [UIColor blackColor];
+
+    [self.view addSubview:scrollMenu];
+    */
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]
+                                            initWithTarget:self action:@selector(swipeColorRight:)];
+    [swipeRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:swipeRight];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]
+                                            initWithTarget:self action:@selector(swipeColorLeft:)];
+    [swipeLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:swipeLeft];
     
 }
 
+- (void)swipeColorRight:(UISwipeGestureRecognizer *)gesture {
+    
+    for (int i = 0; i <= _buttons.count; i++) {
+        
+        if (i == _buttonTag) {
+            
+            UIButton* temp = [UIButton new];
+            
+            if (i == 0) {
+                temp.backgroundColor = [UIColor whiteColor];
+                temp.tag = -2;
+            }
+            else {
+                
+                temp = _buttons[_buttonTag - 1];
+            }
+            
+            [self changeColor:temp];
+            return;
+            
+        }
+    }
 
--(void)doneButton {
+    
+}
+
+- (void)swipeColorLeft:(UISwipeGestureRecognizer *)gesture {
+    
+    for (int i = 0; i <= _buttons.count; i++) {
+        
+        if (i == _buttonTag) {
+            
+            UIButton* temp = [UIButton new];
+            
+            if (i == _buttons.count) {
+                temp.backgroundColor = [UIColor whiteColor];
+                temp.tag = -1;
+            }
+            else {
+                
+                temp = _buttons[_buttonTag];
+            }
+            
+            [self changeColor:temp];
+            return;
+            
+        }
+    }
+  
+}
+
+- (void)done {
     
     [self.detailText resignFirstResponder];
     [self.detailTitle resignFirstResponder];
@@ -110,7 +195,17 @@ static NSString *textKey = @"text";
     
     if ([sender backgroundColor] == [UIColor whiteColor]) {
         
-        sender.backgroundColor = self.buttonColor;
+        if (sender.tag == -1) {
+            
+            UIButton *temp = _buttons[3];
+            temp.backgroundColor = self.view.backgroundColor;
+        }
+        else {
+            sender.backgroundColor = self.buttonColor;
+        }
+        
+        self.buttonTag = 0;
+        
         backColor = [UIColor whiteColor];
         textColor = [UIColor darkTextColor];
     }
@@ -122,12 +217,14 @@ static NSString *textKey = @"text";
                 
                 if (button.backgroundColor == [UIColor whiteColor]) {
                     button.backgroundColor = self.buttonColor;
+                    break;
                 }
             }
     
         }
         
         self.buttonColor = [sender backgroundColor];
+        self.buttonTag = [sender tag];
         backColor = [sender backgroundColor];
         textColor = [UIColor whiteColor];
         sender.backgroundColor = [UIColor whiteColor];
@@ -158,22 +255,23 @@ static NSString *textKey = @"text";
     
     [self.detailTitle resignFirstResponder];
     
-    [self.detailText setSelectedTextRange:[self.detailText
-                                           textRangeFromPosition:self.detailText.beginningOfDocument
-                                           toPosition:self.detailText.endOfDocument]];
-    [self.detailText becomeFirstResponder]; // for some reason selects the second line
+    return YES;
+}
+
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    
+    _doneButton.title = @"Done";
     
     return YES;
 }
 
-/*
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
-    if ([textView.text isEqual:@""]) {
-        //textView.text = @"Notes...";
-    }
+    _doneButton.title = @"";
 }
-*/
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     

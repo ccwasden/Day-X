@@ -13,6 +13,7 @@
 
 static NSString *titleKey = @"title";
 
+
 @implementation DXListTableViewDataSource
 
 - (void) registerTableView:(UITableView *)tableView {
@@ -23,18 +24,26 @@ static NSString *titleKey = @"title";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
     ESEntry *entry = [ESEntryController sharedInstance].entries[indexPath.row];
     
-    
-    cell.textLabel.text = entry.title;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.backgroundColor = entry.color;
+    cell.textLabel.text = entry.title;
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25];
+    
+    /* I think I need my own custom cell class..
+    self.summary = [[UILabel alloc] initWithFrame:CGRectMake(200, 20, cell.bounds.size.width - 200, cell.bounds.size.height - 20)];
+    self.summary.text = entry.text;
+    self.summary.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+    self.summary.textAlignment = NSTextAlignmentRight;
+     */
+    
     if (entry.color != [UIColor whiteColor]) {
         cell.textLabel.textColor = [UIColor whiteColor];
+        //self.summary.textColor = [UIColor whiteColor];
     }
     
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25];
+    //[cell addSubview:self.summary];
     
     return cell;
 }
@@ -49,7 +58,6 @@ static NSString *titleKey = @"title";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
         
         ESEntry *toRemove = [ESEntryController sharedInstance].entries[indexPath.row];
         

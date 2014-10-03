@@ -19,12 +19,15 @@
 		711A508519388096005642EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711A506D19388095005642EF /* UIKit.framework */; };
 		711A508D19388096005642EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 711A508B19388096005642EF /* InfoPlist.strings */; };
 		711A508F19388096005642EF /* DayXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 711A508E19388096005642EF /* DayXTests.m */; };
-		BE049DD119CDEF77002DB21C /* ESEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = BE049DCE19CDEF77002DB21C /* ESEntry.m */; };
 		BE049DD219CDEF77002DB21C /* ESEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE049DD019CDEF77002DB21C /* ESEntryController.m */; };
 		BE049DD519CDEFCE002DB21C /* DXListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE049DD419CDEFCE002DB21C /* DXListViewController.m */; };
 		BE2A8AB519CBC96B00155F95 /* DXListTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2A8AB419CBC96B00155F95 /* DXListTableViewDataSource.m */; };
 		BE64EB7219C920AB004DD138 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE64EB7019C920AB004DD138 /* DetailViewController.m */; };
 		BE64EB7319C920AB004DD138 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE64EB7119C920AB004DD138 /* DetailViewController.xib */; };
+		BE650B5919DE26E400BFDB78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE650B5819DE26E400BFDB78 /* CoreData.framework */; };
+		BE650B5C19DE27D800BFDB78 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE650B5A19DE27D800BFDB78 /* Model.xcdatamodeld */; };
+		BE650B5F19DE2A8100BFDB78 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = BE650B5E19DE2A8100BFDB78 /* Entry.m */; };
+		BE650B6519DE331800BFDB78 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = BE650B6419DE331800BFDB78 /* Stack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +57,6 @@
 		711A508A19388096005642EF /* DayXTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DayXTests-Info.plist"; sourceTree = "<group>"; };
 		711A508C19388096005642EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		711A508E19388096005642EF /* DayXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DayXTests.m; sourceTree = "<group>"; };
-		BE049DCD19CDEF77002DB21C /* ESEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEntry.h; sourceTree = "<group>"; };
-		BE049DCE19CDEF77002DB21C /* ESEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEntry.m; sourceTree = "<group>"; };
 		BE049DCF19CDEF77002DB21C /* ESEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESEntryController.h; sourceTree = "<group>"; };
 		BE049DD019CDEF77002DB21C /* ESEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESEntryController.m; sourceTree = "<group>"; };
 		BE049DD319CDEFCE002DB21C /* DXListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXListViewController.h; sourceTree = "<group>"; };
@@ -65,6 +66,12 @@
 		BE64EB6F19C920AB004DD138 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		BE64EB7019C920AB004DD138 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		BE64EB7119C920AB004DD138 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		BE650B5819DE26E400BFDB78 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BE650B5B19DE27D800BFDB78 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		BE650B5D19DE2A8100BFDB78 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entry.h; path = ../Entry.h; sourceTree = "<group>"; };
+		BE650B5E19DE2A8100BFDB78 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Entry.m; path = ../Entry.m; sourceTree = "<group>"; };
+		BE650B6319DE331800BFDB78 /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
+		BE650B6419DE331800BFDB78 /* Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stack.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE650B5919DE26E400BFDB78 /* CoreData.framework in Frameworks */,
 				711A506C19388095005642EF /* CoreGraphics.framework in Frameworks */,
 				711A506E19388095005642EF /* UIKit.framework in Frameworks */,
 				711A506A19388095005642EF /* Foundation.framework in Frameworks */,
@@ -113,6 +121,7 @@
 		711A506819388095005642EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE650B5819DE26E400BFDB78 /* CoreData.framework */,
 				711A506919388095005642EF /* Foundation.framework */,
 				711A506B19388095005642EF /* CoreGraphics.framework */,
 				711A506D19388095005642EF /* UIKit.framework */,
@@ -124,6 +133,11 @@
 		711A506F19388095005642EF /* DayX */ = {
 			isa = PBXGroup;
 			children = (
+				BE650B5A19DE27D800BFDB78 /* Model.xcdatamodeld */,
+				BE650B6319DE331800BFDB78 /* Stack.h */,
+				BE650B6419DE331800BFDB78 /* Stack.m */,
+				BE650B5D19DE2A8100BFDB78 /* Entry.h */,
+				BE650B5E19DE2A8100BFDB78 /* Entry.m */,
 				711A507819388095005642EF /* DXAppDelegate.h */,
 				711A507919388095005642EF /* DXAppDelegate.m */,
 				BE049DD319CDEFCE002DB21C /* DXListViewController.h */,
@@ -132,8 +146,6 @@
 				BE2A8AB419CBC96B00155F95 /* DXListTableViewDataSource.m */,
 				BE64EB6F19C920AB004DD138 /* DetailViewController.h */,
 				BE64EB7019C920AB004DD138 /* DetailViewController.m */,
-				BE049DCD19CDEF77002DB21C /* ESEntry.h */,
-				BE049DCE19CDEF77002DB21C /* ESEntry.m */,
 				BE049DCF19CDEF77002DB21C /* ESEntryController.h */,
 				BE049DD019CDEF77002DB21C /* ESEntryController.m */,
 				BE64EB7119C920AB004DD138 /* DetailViewController.xib */,
@@ -273,12 +285,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE650B6519DE331800BFDB78 /* Stack.m in Sources */,
 				BE049DD519CDEFCE002DB21C /* DXListViewController.m in Sources */,
 				BE2A8AB519CBC96B00155F95 /* DXListTableViewDataSource.m in Sources */,
 				BE049DD219CDEF77002DB21C /* ESEntryController.m in Sources */,
+				BE650B5C19DE27D800BFDB78 /* Model.xcdatamodeld in Sources */,
+				BE650B5F19DE2A8100BFDB78 /* Entry.m in Sources */,
 				711A507A19388095005642EF /* DXAppDelegate.m in Sources */,
 				711A507619388095005642EF /* main.m in Sources */,
-				BE049DD119CDEF77002DB21C /* ESEntry.m in Sources */,
 				BE64EB7219C920AB004DD138 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,6 +508,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BE650B5A19DE27D800BFDB78 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BE650B5B19DE27D800BFDB78 /* Model.xcdatamodel */,
+			);
+			currentVersion = BE650B5B19DE27D800BFDB78 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 711A505E19388095005642EF /* Project object */;
 }
