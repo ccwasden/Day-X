@@ -35,6 +35,15 @@
 
 - (void)addEntryWithTitle:(NSString *)title text:(NSString *)text date:(NSDate *)date {
     
+    if ([title isEqualToString:@""]) {
+        if ([text isEqualToString:@""]) {
+            return;
+        }
+        else {
+            title = @"New Note";
+        }
+    }
+    
     //THIS IS HOW YOU CREATE A NEW INSTANCE IN YOUR MANAGED OBJECT CONTEXT
     Entry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"Entry" inManagedObjectContext:[Stack sharedInstance].managedObjectContext];
     
