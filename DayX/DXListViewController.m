@@ -35,31 +35,30 @@
                                                                                            target:self action:@selector(addDetailView:)];
 
     
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.tableView = [UITableView new];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.dataSource = [DXListTableViewDataSource new];
     self.tableView.dataSource = self.dataSource;
     [self.dataSource registerTableView:self.tableView];
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
+    NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[tableView]-|" options:0 metrics:nil views:@{@"tableView":self.tableView}];
+    NSArray * hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[tableView]-|" options:0 metrics:nil views:@{@"tableView":self.tableView}];
+    [self.view addConstraints:vConstraints];
+    [self.view addConstraints:hConstraints];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
-    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    [swipeDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    [self.view addGestureRecognizer:swipeDown];
-    
 }
 
-
-- (void)handleGesture:(UISwipeGestureRecognizer *)swipeDirection {
-    
-    NSLog(@"HERE");
-    
-    DetailViewController *detailViewController = [DetailViewController new];
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if(scrollView.contentOffset.y + scrollView.contentInset.top < -55) {
+        DetailViewController *detailViewController = [DetailViewController new];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
 }
+
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
